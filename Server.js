@@ -6,7 +6,7 @@ var socketio = require('socket.io');
 var express = require('express');
 var app = express();
 // TODO NE PAS CHANGER LE PORT 3005 est utilisé sur le reverse proxy en PROD
-var port = 3000;
+var port = 3001;
 
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -37,7 +37,7 @@ io.sockets.on('connection', function(socket){
         io.sockets.emit('envoiCartesIA', cartes);
     })
 
-    socket.on('reponseCartesServ', function (cartes) {
+    socket.on('responseCarteServ', function (cartes) {
         console.log("cartes reçues du serveur python");
         io.sockets.emit('envoiCartesFront', cartes);
     })
